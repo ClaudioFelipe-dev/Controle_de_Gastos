@@ -1,0 +1,39 @@
+{% extends 'gastos/base.html' %}
+{% block title %}Lista de Despesas{% endblock %}
+{% block content %}
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'gastos/css/lista.css' %}">
+
+<h2>Lista de Despesas</h2>
+<p>Total: R$ {{ total }}</p>
+
+<table border="1" cellpadding="6" cellspacing="0">
+  <thead>
+    <tr>
+      <th>Descrição</th><th>Categoria</th><th>Valor</th><th>Data</th><th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for d in despesas %}
+    <tr>
+      <td>{{ d.descricao }}</td>
+      <td>{{ d.categoria }}</td>
+      <td>R$ {{ d.valor }}</td>
+      <td>{{ d.data }}</td>
+      <td>
+        <a href="{% url 'gastos:editar_despesa' d.id %}">Editar</a> |
+        <a href="{% url 'gastos:excluir_despesa' d.id %}">Excluir</a>
+      </td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="5">Nenhuma despesa registrada.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<div class="add">
+  <a href="{% url 'gastos:nova_despesa' %}">+ Nova despesa</a>
+</div>
+
+{% endblock %}

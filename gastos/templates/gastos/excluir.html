@@ -1,0 +1,12 @@
+{% extends 'gastos/base.html' %}
+{% block title %}Excluir Despesa{% endblock %}
+{% block content %}
+<h2>Confirmar exclusão</h2>
+<p>Tem certeza que deseja excluir: <strong>{{ despesa.descricao }} — R${{ despesa.valor }}</strong> ?</p>
+
+<form method="post">
+  {% csrf_token %}
+  <button type="submit">Sim, excluir</button>
+  <a href="{% url 'gastos:lista_despesas' %}">Cancelar</a>
+</form>
+{% endblock %}
